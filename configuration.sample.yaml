@@ -1,14 +1,1 @@
-refresh_timeout_seconds: 20
-jenkins_url: "https://username:token@jenkins.company.com"
-jenkins_job_name: "job name in jenkins"
-usb_infrared_device_path: "/dev/ttyACM0"
-# blue => green
-jenkins_color_blue: "FFD827"
-# notbuilt => blue
-jenkins_color_notbuilt: "FF8877"
-# red => red
-jenkins_color_red: "FF9867"
-# blue_anime => blue
-jenkins_color_blue_anime: "FF8877"
-# red_anime => blue
-jenkins_color_red_anime: "FF8877"
+application_port: 3001
