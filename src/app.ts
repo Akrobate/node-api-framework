@@ -5,6 +5,13 @@ let config:any = Configuration
 
 var server = new Server()
 
+server.setRamlFile(config.raml_specification_file)
+server.processRaml()
+
+// Here to get raml parsed
+// let ramljson = server.getRamlJsonSchema()
+// console.log(JSON.stringify(ramljson, null, 2))
+
 server.app.get('/', function (req, res) {
     console.log(req)
     console.log(res)
