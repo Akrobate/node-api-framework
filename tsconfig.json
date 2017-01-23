@@ -7,7 +7,7 @@
 		"emitDecoratorMetadata": false,
 		"experimentalDecorators": false,
 		"removeComments": true,
-		"noImplicitAny": true,
+		"noImplicitAny": false,
 		"pretty":false,
 		"listFiles": false,
 		"outDir": "dist",
