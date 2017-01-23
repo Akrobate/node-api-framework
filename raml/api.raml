@@ -25,3 +25,45 @@ uses:
                         application/json:
                             type: TypeUser.User
                             example: !include examples/type.user.json
+
+/users2:
+    description: Users management
+    /read/{id}:
+        uriParameters:
+            id:
+                description: The user id you want to fetch
+                type: integer
+                example: 1
+        get:
+            description: Get the user with the given Id
+            responses:
+                200:
+                    body:
+                        application/json:
+                            type: TypeUser.User
+                            example: !include examples/type.user.json
+
+    /update/{id}:
+        uriParameters:
+            id:
+                description: The user id you want to fetch
+                type: integer
+                example: 1
+        get:
+            description: Get the user with the given Id
+            responses:
+                200:
+                    body:
+                        application/json:
+                            type: TypeUser.User
+                            example: !include examples/type.user.json
+    /create:
+        /me:
+            get:
+                description: Get the user with the given Id
+                responses:
+                    200:
+                        body:
+                            application/json:
+                                type: TypeUser.User
+                                example: !include examples/type.user.json
