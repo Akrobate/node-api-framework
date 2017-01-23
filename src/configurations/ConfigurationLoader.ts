@@ -9,4 +9,5 @@ let used_configuration = yml_parser.safeLoad(fs.readFileSync(process.cwd() + '/'
 
 export let Configuration: Object = {
     application_port: used_configuration.application_port,
+    raml_specification_file: used_configuration.raml_specification_file,
 }
