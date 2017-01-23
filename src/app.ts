@@ -12,7 +12,7 @@ server.processRaml()
 // let ramljson = server.getRamlJsonSchema()
 // console.log(JSON.stringify(ramljson, null, 2))
 
-server.app.get('/', function (req, res) {
+server.app.get('/', function (req: any, res: any) {
     console.log(req)
     console.log(res)
     res.send('Hello World')
