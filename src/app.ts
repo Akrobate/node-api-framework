@@ -22,7 +22,9 @@ let raml_auto_route = new RamlAutoRoute(server.getRamlJsonSchema())
 raml_auto_route.extractFlatRoutes()
 
 raml_auto_route.toExpressProcessRamlFlatRoutes()
-console.log(raml_auto_route.getExpressNormalizedRoutes())
+//console.log(raml_auto_route.getExpressNormalizedRoutes())
+raml_auto_route.generateControllersNames()
+console.log(raml_auto_route.getGeneratedControllersName())
 
 // Standart routes management (express)
 server.app.get('/', function (req: any, res: any) {
@@ -33,24 +35,3 @@ server.app.get('/', function (req: any, res: any) {
 
 // Launching server
 server.app.listen(config.application_port)
-
-/*
-var result = "<tsssitle>testttttt</title><title>testttttt222</title><ticcctle>testttttt</ticcctle>"
-console.log(result)
-var title = result.match(/<ti1tle>([^<]+)<\/title>/)[1]
-
-console.log(title)
-*/
-
-/*
-
-let str: string
-// str = "<b>Bob</b>, I'm <b>20</b> years old, I like <b>programming</b>.";
-str = "/users/{id}/company/{company_id}/me";
-
-var result = str.match(/{(.*?)}/g).map(function(val){
-// var result = str.match(/<b>(.*?)<\/b>/g).map(function(val){
-   return val;
-});
-*/
-//console.log(result)
