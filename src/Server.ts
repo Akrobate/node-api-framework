@@ -1,4 +1,6 @@
 "use strict";
+declare var require: any
+declare var process: any
 
 // import * as bodyParser from "body-parser";
 import * as express from "express";
@@ -16,6 +18,7 @@ export class Server {
   private raml_file: string
   private raml_json_schema: any
 
+  private flat_routes: any[]
 
   /**
    * Constructor.
@@ -26,6 +29,7 @@ export class Server {
   constructor() {
     //create expressjs application
     this.app = express()
+    this.flat_routes = [];
   }
 
   /**
