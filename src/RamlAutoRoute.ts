@@ -12,7 +12,7 @@ let ucfirst = require("ucfirst");
 
 /**
  * The RamlAutoRoute.
- *
+ * Will be an external module
  * @class RamlAutoRoute
  */
 export class RamlAutoRoute {
