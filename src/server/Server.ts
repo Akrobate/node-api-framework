@@ -1,11 +1,12 @@
 'use strict'
-
-// import * as bodyParser from "body-parser";
 import * as express from 'express';
-// import {Logger} from './Logger';
 import {Routes} from './Routes';
 import {Route} from './Route';
 import {Request, Response} from 'express'
+import {ClassAutoload} from '../libs/ClassAutoload'
+var ucfirst = require('ucfirst')
+// import {Logger} from './Logger';
+// import * as bodyParser from "body-parser";
 
 /**
  *
@@ -78,25 +79,40 @@ export class Server {
     public addRoutesFromRamlAutoRoute(raml_auto_route: any): void {
 
         if (raml_auto_route !== null) {
+            let autoloader = new ClassAutoload()
+            autoloader.setClassDirectoryPath('./controllers')
+
             let auto_routes = raml_auto_route.getRoutes()
             let routes_list = []
             for (let route of auto_routes) {
                 routes_list.push(new Route(route.verb, route.express_uri, (request: Request, response: Response) => {
-                    console.log(request)
-                    let data = {
-                        'generic': "response",
-                        'verb':route.verb,
-                        'url': route.express_uri
+                    let params = request
+                    // /v1/users2/create/me
+                    let ControllerType = autoloader.getClass(ucfirst(route.verb) + route.controller_name)
+                    // Check if class implementation exists
+                    if (ControllerType === undefined) {
+                        let data = {
+                            'generic': "response",
+                            'verb':route.verb,
+                            'url': route.express_uri,
+                            'code' : 0,
+                            'msg': "Controller not implemented",
+                            'controller_name:': route.controller_name
+                        }
+                        return response.json(data)
+                    } else {
+                        let controller = new ControllerType()
+                        controller.process(params).then((data) => {
+                            return response.json(data)
+                        }).catch(() => {
+                            return response.json({ 'code' : 1, 'msg': "Controller has not process"})
+                        })
                     }
-                    return response.json(data)
                 }))
                 console.log(route)
             }
-            let api_routes_configuration = {
-                base_url: '/',
-                routes: routes_list
-            }
-            this.addRoutes(new Routes(api_routes_configuration));
+
+            this.addRoutes(new Routes({ base_url: '/', routes: routes_list } ));
         }
     }
 
