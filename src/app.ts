@@ -30,7 +30,17 @@ if (print_schema) {
     console.log(JSON.stringify(ramljson, null, 2))
 }
 
-console.log(JSON.stringify(raml_auto_route.getRoutes(), null, 2))
+// console.log(JSON.stringify(raml_auto_route.getRoutes(), null, 2))
+
+import {ClassAutoload} from './libs/ClassAutoload'
+
+let autoloader = new ClassAutoload()
+autoloader.setClassDirectoryPath('./controllers')
+console.log(autoloader.getClass('GetUsers2CreateMe'))
+
+let GetUsers2CreateMe = autoloader.getClass('GetUsers2CreateMe')
+let t = new GetUsers2CreateMe()
+t.process({'test':'test'})
 
 server.addRoutesFromRamlAutoRoute(raml_auto_route)
 
