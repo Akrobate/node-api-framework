@@ -1,10 +1,24 @@
-import {Configuration} from './configurations/ConfigurationLoader'
-import {Server} from './Server'
-//import RamlAutoRoute from 'raml-autoroute'
+// import {Request, Response} from 'express';
 let RamlAutoRoute = require('raml-autoroute')
+import {Server} from './server/Server';
+// import {Routes} from './Routes';
+// import {Route} from './Route';
+import {HeadersMiddleware} from './server/middlewares/HeadersMiddleware';
+import {BodyParserMiddleware} from './server/middlewares/BodyParserMiddleware';
+// import {LoggerMiddleware} from './middlewares/LoggerMiddleware';
+import {Configuration} from './configurations/ConfigurationLoader'
 
 let config:any = Configuration
-var server = new Server()
+
+// starting Application Server
+const server = new Server({ port: config.application_port });
+server.addMiddleware(HeadersMiddleware.ACCESS_CONTROL_ALLOW_ORIGIN)
+server.addMiddleware(HeadersMiddleware.ACCESS_CONTROL_ALLOW_HEADERS)
+server.addMiddleware(HeadersMiddleware.ACCESS_CONTROL_ALLOW_METHODS)
+server.addMiddleware(HeadersMiddleware.ACCESS_CONTROL_ALLOW_CREDENTIALS)
+server.addMiddleware(BodyParserMiddleware.URL_ENCODED)
+server.addMiddleware(BodyParserMiddleware.JSON)
+// server.addMiddleware(LoggerMiddleware.MORGAN);
 
 let raml_auto_route = new RamlAutoRoute(config.raml_specification_file)
 
@@ -16,15 +30,9 @@ if (print_schema) {
     console.log(JSON.stringify(ramljson, null, 2))
 }
 
+console.log(JSON.stringify(raml_auto_route.getRoutes(), null, 2))
 
-console.log(raml_auto_route.getRoutes())
+server.addRoutesFromRamlAutoRoute(raml_auto_route)
 
-// Standart routes management (express)
-server.app.get('/', function (req: any, res: any) {
-    console.log(req)
-    console.log(res)
-    res.send('Hello World')
-})
-
-// Launching server
-server.app.listen(config.application_port)
+// server.addRoutes(new Routes(api_v1_routes_configuration));
+server.listen();
