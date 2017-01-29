@@ -38,6 +38,8 @@ let autoloader = new ClassAutoload()
 autoloader.setClassDirectoryPath('./controllers')
 console.log(autoloader.getClass('GetUsers2CreateMe'))
 
+// /v1/users2/create/me
+
 let GetUsers2CreateMe = autoloader.getClass('GetUsers2CreateMe')
 let t = new GetUsers2CreateMe()
 t.process({'test':'test'})

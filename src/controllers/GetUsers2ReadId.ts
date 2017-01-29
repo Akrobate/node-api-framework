@@ -1,8 +1,8 @@
 
-export class GetUsers2CreateMe {
+export class GetUsers2ReadId {
 
     public constructor() {
-        // console.log('contructed GetUsers2CreateMe')
+        // console.log('contructed Users2ReadId')
     }
 
     public process(params: any): Promise<any> {
@@ -12,7 +12,7 @@ export class GetUsers2CreateMe {
             if (e) {
                 reject()
             }
-            params.controller = 'contructed GetUsers2CreateMe'
+            params.controller = 'contructed Users2ReadId'
             resolve(params)
         })
     }
