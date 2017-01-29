@@ -3,17 +3,10 @@ import {Server} from './Server'
 //import RamlAutoRoute from 'raml-autoroute'
 let RamlAutoRoute = require('raml-autoroute')
 
-
 let config:any = Configuration
 var server = new Server()
 
-// Load Raml Specification file
-// server.setRamlFile(config.raml_specification_file)
-// server.processRaml()
-
 let raml_auto_route = new RamlAutoRoute(config.raml_specification_file)
-
-
 
 // Debug : print schema if true
 let print_schema = false
