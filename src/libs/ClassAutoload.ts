@@ -1,4 +1,5 @@
 var fs = require('fs')
+var path = require('path')
 
 export class ClassAutoload {
 
@@ -15,9 +16,10 @@ export class ClassAutoload {
     }
 
     public checkClassExistsFs(class_name: string): boolean {
-        let path = this.class_directory_path + '/' + class_name + '.js';
+        let filepath = path.resolve(process.cwd(), 'src/' + this.class_directory_path + '/' + class_name + '.ts');
+        console.log(filepath)
         let result = false
-        if (fs.existsSync(path)) {
+        if (fs.existsSync(filepath)) {
             result = true
         }
         return result
@@ -32,8 +34,11 @@ export class ClassAutoload {
     }
 
     public loadClass(class_name: string) {
-        let path_require = this.class_directory_path + '/' + class_name + '.js'
-        var loaded_class = require(path_require)
+        let path_require = '../' + this.class_directory_path + '/' + class_name
+        var loaded_class_imp = require(path_require)
+        let loaded_class = loaded_class_imp[class_name]
+        // let t = new type()
+        // t.process({'test':'test'})
         this.classes_collection[class_name] = loaded_class
     }
 
