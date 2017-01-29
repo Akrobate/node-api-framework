@@ -12,8 +12,7 @@ export class GetUsers2ReadId {
             if (e) {
                 reject()
             }
-            params.controller = 'contructed Users2ReadId'
-            resolve(params)
+            resolve({controller:'contructed Users2ReadId'})
         })
     }
 }

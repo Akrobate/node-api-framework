@@ -12,8 +12,7 @@ export class GetUsers2CreateMe {
             if (e) {
                 reject()
             }
-            params.controller = 'contructed GetUsers2CreateMe'
-            resolve(params)
+            resolve({controller:'contructed GetUsers2CreateMe'})
         })
     }
 }
